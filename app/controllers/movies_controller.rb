@@ -1,16 +1,17 @@
 class MoviesController < ApplicationController
-  def create 
+  def create
     m = Movie.new
     m.title = params.fetch("the_title")
     m.year = params.fetch("the_year")
+    m.duration = params.fetch("the_duration")
     m.description = params.fetch("the_description")
     m.image = params.fetch("the_image")
     m.director_id = params.fetch("the_director_id")
 
-    m.save 
+    m.save
 
     redirect_to("/movies")
-  end 
+  end
 
   def destroy 
     the_id = params.fetch("an_id")
@@ -23,7 +24,7 @@ class MoviesController < ApplicationController
 
     redirect_to("/movies")
   end 
-  
+
   def index
     matching_movies = Movie.all
     @list_of_movies = matching_movies.order({ :created_at => :desc })
